@@ -15,6 +15,14 @@ This RFC attempts to first document all the ideas that have been proposed with a
 
 See Summary section.
 
+## Suggested Principles for the Model
+- Start with the slimmest model possible that accomplishes the MVP requirements. This will ensure that we broaden the model as we encounter new requirements versus over-designing it too early.
+
+## MVP Requirements
+
+TBD
+
+
 ## Emerging Consensus (Still up for debate)
 
 - Data Products are 1:N with DataHub's notion of Datasets both for input and output
