@@ -15,7 +15,15 @@ This RFC attempts to first document all the ideas that have been proposed with a
 
 See Summary section.
 
-## Discussion So Far
+## Emerging Consensus (Still up for debate)
+
+- Data Products are 1:N with DataHub's notion of Datasets both for input and output
+- There must be at least one output dataset for a Data Product
+- Logical Datasets (some people call them Polyglot Datasets) are important to model as part of this effort. A single Data Product might export multiple logical datasets where each logical dataset can have physical variants stored in different platforms and expose a slightly different technical schema (e.g Logical Dataset that can be consumed over Kafka or Athena)
+- Data Products can have a logical schema if they are encapsulating a single Logical Dataset with a common schema across the physical dataset variants, but in cases where an entire star schema is being represented as a Data Product, it might just be a collection of related datasets.
+
+
+## Raw Discussion Log
 
 Ray Suliteanu
 I will share details when we have them, but at a high level here is what we’ve been thinking/considering
