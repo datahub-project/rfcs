@@ -1,5 +1,5 @@
 - Start Date: 2023-01-24
-- RFC PR: [TBD](TBD)
+- RFC PR: [https://github.com/datahub-project/rfcs/pull/1](https://github.com/datahub-project/rfcs/pull/1)
 - Discussion Issue: [Discussion on Slack](https://datahubspace.slack.com/archives/C03UV8BNXEW/p1673471786747339)
 - Implementation PR(s): (leave this empty)
 
