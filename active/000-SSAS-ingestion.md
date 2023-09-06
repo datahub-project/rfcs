@@ -58,17 +58,21 @@ graph TB;
     c1---b1;
     b1---a1;
     b1---a2;
-    subgraph s1[DataSet];
+    subgraph s1[Properties];
     a1["Dimension"];
     a2["Measure"];
     end;
-    subgraph s2[DataJob];
+    subgraph s2[DataSet];
     b1["Cube"];
     end;
-    subgraph s3[DataFlow];
+    subgraph s3[Container];
     c1["Catalog(database)"];
     end;
 ```
+- Server maps to a container.
+- Catalog maps to a container (and is hierarchically nested within the server container).
+- Cube is mapped as a dataset.
+- Dimension and measure become properties of the dataset.
 ## How we teach this
 
 We should create/update user guides to educate users for:
