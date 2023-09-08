@@ -1,5 +1,5 @@
 - Start Date: (2013-09-01)
-- RFC PR: (after opening the RFC PR, update this with a link to it and update the file name)
+- RFC PR: [https://github.com/datahub-project/rfcs/pull/4](https://github.com/datahub-project/rfcs/pull/4)
 - Discussion Issue: (None)
 - Implementation PR(s): (leave this empty)
 
