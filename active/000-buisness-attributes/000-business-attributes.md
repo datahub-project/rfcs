@@ -85,33 +85,31 @@ Below are the current Relationships of Dataset Entity with its aspects in Datahu
 
 ### Model Business Attribute Entity
 
-We are proposing to introduce a new entity `BusinessAttribute`, which will use a new Aspect `BusinessAttributeInfo`. This new entity will be a top level entity to allow it to be defined and controlled independently by the business team.
+We're suggesting the introduction of a new entity called BusinessAttribute and a new Aspect known as BusinessAttributeInfo. This new entity will be a top-level entity, enabling it to be independently defined and managed by the business team.
 
-User can able to attach `Business Attributes` only to `Schema Fields`. We will make necessary UI changes to control this feature.
+Users will have the ability to attach Business Attributes exclusively to dataset schema Fields. We're also suggesting necessary modifications to the user interface to manage this feature.
 
-New `BusinessAttributeInfo` aspect contains existing `EditableSchemaFieldInfo` record type and also `customProperties`.  Also we are introducing one new record type, `PhysicalEditableSchemaFieldInfo` which includes existing `EditableSchemaFieldInfo`. As per this implementation, existing aspect `EditableSchemaMetadata` now contains a list of `PhysicalEditableSchemaFieldInfo` records instead of `EditableSchemaFieldInfo` records.
+We're proposing a new base class called EditableSchemaFieldBase, which will be included in both EditableSchemaFieldInfo and BusinessAttributeInfo. The main goal is to repurpose existing Records to model BusinessAttributeInfo.
 
-Each `PhysicalEditableSchemaFieldInfo` will contain an `EditableSchemaFieldInfo` and the new field "`businessAttribute`" to represent the link between dataset schema field and business attribute. We are also proposing the introduction of a new field, "`type`", in `EditableSchemaFieldInfo`.
+Furthermore, we're introducing a new field named businessAttribute of the type BusinessAttributeAssociation in EditableSchemaFieldInfo. This field will contain the urn for the BusinessAttribute attached to the dataset schema field.
 
-### URN Representation for Business Attribute
 ![](business-attribute-rfc-8.png)
 
+### URN Representation for Business Attribute
 ```
 urn:li:businessAttribute:b3916dfe-a27c-4916-97be-60773dca90d7
 ```
 
 ###  Business Attribute Attachment to SchemaField
-When the user attaches a business attribute to the corresponding schema field, the link will be represented by the business attribute id in the `PhysicalEditableSchemaFieldInfo` for Dataset. 
-
-Any changes made to business attribute will be reflected on dataset details page on the fly. Also, delinking the business attribute from the schema field is implemented by simply removing the business attribute reference.
+To create a link between the dataset schema field and the business attribute, we are proposing the introduction of a new aspect, BusinessAttributeAssociation, and a new field of the same type named businessAttribute. This field will be located in EditableSchemaFieldInfo and will hold the urn for the business attribute.
 
 ### Metadata Graph
 
 #### Enabling Capability of searching Dataset entities as per Description/tags of Business Attributes
 
-We are proposing to introduce new annotation "`@SearchableRef`", through which we can populate the elastic indexes with expanded details regarding the referenced entity.
+We propose to introduce a new annotation "@SearchableRef" to enhance the search capability of Dataset entities based on the Description/tags of Business Attributes. This annotation will allow us to populate the Elasticsearch indexes with expanded details about the referenced entity.
 
-For example, in "`PhysicalEditableSchemaFieldInfo`" we are referencing `businessAttribute` entity which can be annotated with `@SearchableRef`, which instructs relevant hooks to populate the index `datahubindex_v2` in Elasticsearch with the details of the `businessAttribute` and enables search of dataset as per properties of the `businessAttribute`. Below is the expected structure of `datasetindex_v2` after business attribute linked with `schemaField`.
+For instance, the new field 'businessAttribute' in EditableSchemaFieldInfo can be annotated with @SearchableRef. This instructs the relevant hooks to populate the Elasticsearch index 'datahubindex_v2' with details of the business attribute and enable the search of datasets based on the properties of the business attribute. The structure of 'datasetindex_v2' is expected to change accordingly once the business attribute is linked with schemaField.
 
 ```json 
 {
@@ -233,7 +231,8 @@ Also, if the consumer fails to update the elastic index in timely manner, there 
 
 ### Model Business Attribute
 
-We have also considered a secondary approach to model Business Attribute Entity (diagram below). In this we are using the existing  `EditableSchemaFieldInfo` record to model a new aspect, `BusinessAttributeInfo`, and also introducing a new field `businessAttribute` in `EditableSchemaFieldInfo` to link a business attribute with the corresponding schemaField. The major issue with this approach is the potential for a circular dependency.
+We have also explored an alternative approach to model the BusinessAttributeInfo aspect (as shown in the diagram below). In this approach, we include the reference of Business Attribute in EditableSchemaFieldInfo. However, this method could potentially lead to cyclic dependencies, which would not correctly represent our intended data model.
+
 ![](business-attribute-rfc-9.png)
 
 ### Business Attribute Attachment with Schema Field
